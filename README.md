@@ -1,35 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Next.js Timestamp Example with On-Demand Revalidation
+
+This is a simple Next.js application that demonstrates static site generation (SSG) with Incremental Static Regeneration (ISR) and on-demand revalidation.
+
+## Features
+
+- Home page displays a timestamp when it was last rendered
+- Automatic revalidation every 60 seconds (configurable)
+- API route for on-demand revalidation
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env.local` file in the root directory with the following content:
+
+```
+# This token is used to secure the revalidation API route
+# In production, use a strong, randomly generated string
+REVALIDATION_TOKEN=your-secret-token
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Build and Start
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+To build the application:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To start the production server:
+
+```bash
+npm start
+```
+
+## Triggering Revalidation
+
+You can trigger revalidation of the home page by making a request to the revalidation API endpoint:
+
+```
+http://localhost:3000/api/revalidate?secret=your-secret-token
+```
+
+Replace `your-secret-token` with the value you set in your `.env.local` file.
 
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+- [On-Demand Revalidation](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration#on-demand-revalidation) - learn about on-demand revalidation in Next.js.
+
+This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
