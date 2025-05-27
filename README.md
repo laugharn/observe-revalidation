@@ -1,12 +1,12 @@
 # Next.js Timestamp Example with On-Demand Revalidation
 
-This is a simple Next.js application that demonstrates static site generation (SSG) with Incremental Static Regeneration (ISR) and on-demand revalidation.
+This is a simple Next.js application that demonstrates static site generation (SSG) with Incremental Static Regeneration (ISR) and on-demand revalidation using both Pages Router and App Router.
 
 ## Features
 
 - Home page displays a timestamp when it was last rendered
-- Automatic revalidation every 60 seconds (configurable)
-- API route for on-demand revalidation
+- Automatic revalidation after a long period (configurable)
+- API routes for on-demand revalidation using both Pages Router and App Router
 
 ## Getting Started
 
@@ -48,10 +48,18 @@ npm start
 
 ## Triggering Revalidation
 
-You can trigger revalidation of the home page by making a request to the revalidation API endpoint:
+You can trigger revalidation of the home page using either of the following API endpoints:
+
+### Pages Router (using `res.revalidate()`)
 
 ```
 http://localhost:3000/api/revalidate?secret=your-secret-token
+```
+
+### App Router (using `revalidatePath()`)
+
+```
+http://localhost:3000/revalidate?secret=your-secret-token
 ```
 
 Replace `your-secret-token` with the value you set in your `.env.local` file.
@@ -61,7 +69,8 @@ Replace `your-secret-token` with the value you set in your `.env.local` file.
 To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [On-Demand Revalidation](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration#on-demand-revalidation) - learn about on-demand revalidation in Next.js.
+- [On-Demand Revalidation (Pages Router)](https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration#on-demand-revalidation) - learn about on-demand revalidation in Next.js Pages Router.
+- [On-Demand Revalidation (App Router)](https://nextjs.org/docs/app/building-your-application/data-fetching/revalidating#on-demand-revalidation) - learn about on-demand revalidation in Next.js App Router.
 
 This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
